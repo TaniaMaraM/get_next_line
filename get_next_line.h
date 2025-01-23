@@ -6,7 +6,7 @@
 /*   By: tmarcos <tmarcos@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:17:26 by tmarcos           #+#    #+#             */
-/*   Updated: 2025/01/23 18:29:24 by tmarcos          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:19:27 by tmarcos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_substr(char *str, unsigned int start, size_t len);
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	ft_strlen(const char *str);
-int     ft_find_newline(const char *str);
-char    *ft_extract_line(char *keep);
-char    *ft_update_keep(char *keep);
-char    *ft_read_file(int fd, char *keep);
+int		ft_find_newline(const char *str);
+char	*ft_extract_line(char *keep);
+char	*ft_update_keep(char *keep);
+char	*ft_read_file(int fd, char *keep);
 char	*get_next_line(int fd);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: tmarcos <tmarcos@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:17:00 by tmarcos           #+#    #+#             */
-/*   Updated: 2025/01/23 18:24:21 by tmarcos          ###   ########.fr       */
+/*   Updated: 2025/01/23 22:32:07 by tmarcos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// #include <stdio.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -61,6 +62,8 @@ char	*ft_substr(char *str, unsigned int start, size_t len)
 }
 char	*ft_strjoin(char *s1, char *s2)
 {
+	// printf("s1: %s\n", s1);  // Depuração
+    // printf("s2: %s\n", s2);  // Depuração
 	char	*joined;
 	size_t	i;
 	size_t	j;
@@ -128,8 +131,8 @@ que você trabalhe com partes específicas da string
  de forma eficiente, sem sobrecarregar a memória
   com dados desnecessários. Além disso, isso
    ajuda no desempenho geral, já que você está
-    sempre lidando apenas com os dados que 
-    são necessários em cada etapa.
+	sempre lidando apenas com os dados que 
+	são necessários em cada etapa.
 
 ft_strjoin: Concatena duas strings.
  Aloca memória para a nova string,

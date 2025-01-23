@@ -1,78 +1,44 @@
-// #include "get_next_line.h"
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// #include <fcntl.h>
+#include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
 
 
-// char    *ft_read_file(int fd, char *keep);
-// void	*ft_calloc(size_t nmemb, size_t size);
-// char    *ft_strjoin(char *s1, char *s2);
-// int     ft_find_newline(const char *str);
+int main(void)
+{
+    int fd;
+    char *line;
 
-// #include "get_next_line.h"
-// #include <stdio.h>
-// #include <fcntl.h>
+    // Abre o arquivo para leitura
+    fd = open("text2.txt", O_RDONLY);
+    if (fd < 0)
+    {
+        perror("Error opening file");
+        return (1);
+    }
+    // Lê o arquivo linha por linha
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);  // Libera a memória da linha lida
+    }
+    close(fd);
+    return (0);
+}
 
-// int main(void)
-// {
-//     int fd;
-//     char *line;
 
-//     // Abre o arquivo para leitura
-//     fd = open("test.txt", O_RDONLY);
-//     if (fd < 0)
-//     {
-//         perror("Erro ao abrir o arquivo");
-//         return (1);
-//     }
-
-//     // Lê o arquivo linha por linha
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("Linha lida: %s", line);
-//         free(line);  // Libera a memória da linha lida
-//     }
-
-//     // Fecha o arquivo
-//     close(fd);
-//     return (0);
-// }
+/* TESTING INVALID FD */
 
 // int main(void)
 // {
-//     int     fd;
-//     char    *result;
-//     char    *keep = NULL;
-
-//     // Abre o arquivo
-//     fd = open("text_file1.txt", O_RDONLY);
-//     if (fd < 0)
-//     {
-//         perror("Erro ao abrir o arquivo");
-//         return (1);
-//     }
-
-//     printf("Arquivo aberto com sucesso! FD: %d\n", fd);
-
-//     // Testa ft_read_file
-//     result = ft_read_file(fd, keep);
-//     if (!result)
-//     {
-//         printf("Erro ao ler o arquivo.\n");
-//         close(fd);
-//         return (1);
-//     }
-
-//     // Imprime o resultado lido
-//     printf("Conteúdo lido:\n%s\n", result);
-
-//     // Libera a memória e fecha o arquivo
-//     free(result);
-//     close(fd);
+//     char *line = get_next_line(42);
+//     if (!line)
+//         printf("Test passed: NULL returned for invalid FD\n");
+//     else
+//         printf("Test failed: Expected NULL, got '%s'\n", line);
 //     return (0);
 // }
-
 
 /* ** TESTE PARA A FUNCAO ft_extract_line e ft_update_keep ** */ 
 // int ft_find_newline(const char *str);
@@ -157,4 +123,48 @@
 //     printf("Test 5: %s -> Newline at index: %d\n", test5, ft_find_newline(test5));
 
 //     return 0;
+// }
+//TESTANDO A FUNCAO READ
+// char *ft_read_file(int fd, char *keep)
+// {
+//     char    *buffer;
+//     int     bytes_read;
+
+//     printf("Entrando em ft_read_file\n");
+
+//     // Aloca espaço para o buffer de leitura
+//     buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+//     if (!buffer)
+//     {
+//         printf("Erro ao alocar memória para o buffer.\n");
+//         return (NULL);
+//     }
+
+//     printf("Memória alocada para buffer com tamanho %d\n", BUFFER_SIZE);
+
+//     while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
+//     {
+//         buffer[bytes_read] = '\0'; // Adiciona terminador nulo
+//         printf("Bytes lidos: %d, Conteúdo do buffer: %s\n", bytes_read, buffer);
+
+//         keep = ft_strjoin(keep, buffer); // Concatena ao conteúdo existente
+//         if (!keep)
+//         {
+//             printf("Erro ao juntar strings em ft_strjoin.\n");
+//             free(buffer);
+//             return (NULL);
+//         }
+//     }
+
+//     free(buffer);
+
+//     if (bytes_read < 0)
+//     {
+//         printf("Erro ao ler o arquivo (bytes_read < 0).\n");
+//         free(keep);
+//         return (NULL);
+//     }
+
+//     printf("Saindo de ft_read_file com conteúdo: %s\n", keep);
+//     return (keep);
 // }

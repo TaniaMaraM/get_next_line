@@ -1,4 +1,0 @@
-Olá, mundo!
-Bem-vindo à 42.
-Este é um teste.
-End of file.
