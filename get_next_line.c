@@ -6,7 +6,7 @@
 /*   By: tmarcos <tmarcos@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:17:22 by tmarcos           #+#    #+#             */
-/*   Updated: 2025/01/23 23:13:15 by tmarcos          ###   ########.fr       */
+/*   Updated: 2025/01/24 13:02:43 by tmarcos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@
  * Retorna:
  * - O índice da primeira ocorrência de '\n', se encontrado.
  * - -1, se não houver '\n' na string.
- * 
+ *
  * ft_extract_line - Extrai a linha de `keep` até o primeiro '\n'.
  * keep: A string de onde a linha será extraída.
  * Retorna:
  * - A linha extraída até o primeiro '\n' (inclusive), ou a string toda se não houver '\n'.
  * - NULL se a string for vazia ou a memória não puder ser alocada.
- * 
+ *
  * * ft_update_keep - Atualiza o buffer 'keep' com o conteúdo restante após o '\n'.
  * @keep: O buffer atual contendo os dados lidos.
  * Retorna:
  * - Uma nova string com o conteúdo restante após o '\n'.
  * - NULL se não houver mais conteúdo restante.
- * 
+ *
  * * ft_read_file - Lê dados de um file descriptor e atualiza o buffer 'keep'.
  * @fd: File descriptor a ser lido.
- * @keep: Buffer atual contendo dados não processados. 
+ * @keep: Buffer atual contendo dados não processados.
  * Retorna:
  * - O buffer atualizado com o conteúdo lido do arquivo.
  * - NULL em caso de erro ou se não houver mais dados a serem lidos.
  * Detalhes:
  * - A função usa o buffer temporário para ler blocos
  *  de dados do arquivo.
- * - Garante que 'keep' seja atualizado e o conteúdo 
+ * - Garante que 'keep' seja atualizado e o conteúdo
  * não processado seja preservado.
  *
  * * get_next_line - Lê uma linha de um arquivo a partir
@@ -55,7 +55,7 @@
  * - Chamada repetida à função retorna uma linha por vez do arquivo.
  * - Ao atingir o final do arquivo, retorna NULL.
  * - A função é robusta para lidar com arquivos pequenos, grandes, vazios ou sem '\n'.
- * 
+ *
  */
 
 #include "get_next_line.h"
@@ -126,34 +126,60 @@ char    *ft_update_keep(char *keep)
 	return (new_keep);
 }
 
-char *ft_read_file(int fd, char *keep)
+char	*ft_read_file(int fd, char *keep)
 {
-    char    *buffer;
-    int     bytes_read;
+	char	*buffer;
+	int		bytes_read;
 
-    buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-    if (!buffer)
-        return (NULL);
-    while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0) // Lê até o final do arquivo
-    {
-        buffer[bytes_read] = '\0'; // Adiciona terminador nulo
-        keep = ft_strjoin(keep, buffer); // Concatena ao conteúdo existente
-        if (ft_find_newline(keep) != -1)
-            break;
-        if (!keep)
-        {
-            free(buffer);
-            return (NULL); // Erro ao juntar strings
-        }
-    }
-    free(buffer);
-    if (bytes_read < 0)
-    {
-        free(keep);
-        return (NULL);
-    }
-    return (keep);
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		keep = ft_strjoin(keep, buffer);
+		if (!keep || ft_find_newline(keep) != -1)
+			break ;
+	}
+	free(buffer);
+	if (bytes_read < 0)
+		return (free(keep), NULL);
+	return (keep);
 }
+
+// char *ft_read_file(int fd, char *keep)
+// {
+//     char    *buffer;
+//     int     bytes_read;
+
+//     buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+//     if (!buffer)
+//         return (NULL);
+// 		bytes_read = read(fd, buffer, BUFFER_SIZE);
+    // while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)// Lê até o final do arquivo
+    // {
+    //     buffer[bytes_read] = '\0'; // Adiciona terminador nulo
+    //     keep = ft_strjoin(keep, buffer); // Concatena ao conteúdo existente
+    //     if (ft_find_newline(keep) != -1)
+    //         break;
+    //     if (!keep)
+    //     {
+    //         free(buffer);
+    //         return (NULL); // Erro ao juntar strings
+    //     }
+    // }
+    // free(buffer);
+    // if (bytes_read < 0)
+    // {
+    //     free(keep);
+    //     return (NULL);
+    // }
+    // return (keep);
+// }
 
 char	*get_next_line(int fd)
 {

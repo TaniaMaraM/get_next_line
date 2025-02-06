@@ -11,7 +11,7 @@ int main(void)
     char *line;
 
     // Abre o arquivo para leitura
-    fd = open("text2.txt", O_RDONLY);
+    fd = open("text1.txt", O_RDONLY);
     if (fd < 0)
     {
         perror("Error opening file");
@@ -40,7 +40,7 @@ int main(void)
 //     return (0);
 // }
 
-/* ** TESTE PARA A FUNCAO ft_extract_line e ft_update_keep ** */ 
+/* ** TESTE PARA A FUNCAO ft_extract_line e ft_update_keep ** */
 // int ft_find_newline(const char *str);
 // char	*ft_substr(char *str, unsigned int start, size_t len);
 // void	*ft_calloc(size_t nmemb, size_t size);
@@ -77,7 +77,7 @@ int main(void)
 
 //     return (0);
 // }
-/* ** TESTE PARA A FUNCAO ft_extract_line ** */ 
+/* ** TESTE PARA A FUNCAO ft_extract_line ** */
 
 // int ft_find_newline(const char *str);
 // char	*ft_substr(char *str, unsigned int start, size_t len);
@@ -103,7 +103,7 @@ int main(void)
 //     return 0;
 // }
 
-/* ** TESTE PARA A FUNCAO ft_find_newline ** */ 
+/* ** TESTE PARA A FUNCAO ft_find_newline ** */
 
 // int ft_find_newline(const char *str);
 
