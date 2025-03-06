@@ -6,12 +6,11 @@
 /*   By: tmarcos <tmarcos@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:17:22 by tmarcos           #+#    #+#             */
-/*   Updated: 2025/01/24 14:15:07 by tmarcos          ###   ########.fr       */
+/*   Updated: 2025/03/06 16:07:39 by tmarcos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 int	ft_find_newline(const char *str)
 {
